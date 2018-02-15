@@ -45,6 +45,10 @@ if(isset($_POST['submit']))
               <form method="GET" action="Register.php">
                   <input type="submit" value="Register" class="btn btn-primary"/>
               </form>
+              <br>
+              <form method="GET" action="reset.php">
+                  <input type="submit" value="Reset Your Password" class="btn btn-primary"/>
+              </form>
 
           </div>
         </div>

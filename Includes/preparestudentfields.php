@@ -18,6 +18,9 @@ $password = crypt($password, $hashF_and_salt);
 $email =$_POST['email'];
 $email = mysqli_real_escape_string($connection, $email);
 
+$schoolname =$_POST['schoolname'];
+$schoolname = mysqli_real_escape_string($connection, $schoolname);
+
 
 
 $secret_question =$_POST['secret_question'];

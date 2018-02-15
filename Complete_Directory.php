@@ -60,7 +60,7 @@ include './Includes/Fetch_Full_Info.php';
 
       <div class="" style="   float:left; display:inline;">
 
-        <a href="User_Page.php" class="btn btn-primary btn-md active" role="button" style="margin:10px;"><?php echo $_SESSION['username']; ?></a>
+      <a href="User_Page.php?id=<?php echo $_SESSION['id'] ?>" class="btn btn-primary btn-md active" role="button" style="margin:10px;"><?php echo $_SESSION['username']; ?></a>
       </div>
 
 

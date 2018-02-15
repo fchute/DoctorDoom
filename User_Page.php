@@ -1,44 +1,125 @@
+<?php
+include './Includes/authenticate.php';
 
 
-<?php include './Includes/authenticate.php'; ?>
+if ($_SESSION["id"] != $_GET["id"]) {
+  header("Location: login.php");
+} else{
+  $get_creatorid=$_GET["id"];
+  $username = $_SESSION['username'];
+}
+ ?>
 
+<?php include './Includes/DB_Config.php'; ?>
 
-
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="container">
-
-
-
- <h3>Welcome, <?php echo $_SESSION['username']; ?>!</h3>
-<div style="width:200%;     text-align: center;">
-
-<div class="" style="   float:left; display:inline;">
-
-  <a href="logout.php" class="btn btn-primary btn-md active" role="button" style="margin:10px;">Logout</a>
-</div>
-<div class="" style="   float:left; display:inline;">
-
-    <a href="Complete_Directory.php" class="btn btn-primary btn-md active" role="button" style="margin:10px;">Complete User Directory</a>
-  </div>
-
-    <div class="" style="   float:left; display:inline;">
-
-      <a href="State_Directory.php" class="btn btn-primary btn-md active" role="button" style="margin:10px;">State user directory</a>
-    </div>
-
-</div>
+<?php include './Includes/Fetch_State_Info.php';
+$state_spaced= str_replace('_', ' ', $state);
+//state info taken separately to replace the string, this will be optimized out
+ ?>
 
 
 
-      </div>
 
-  </body>
-</html>
+<?php include './Includes/Profile_Info.php'; ?>
+
+
+
+
+
+<?php
+
+$query = "SELECT id, schoolname, address, state, phone, creatorstateid FROM schools WHERE creatorid = '$get_creatorid'";
+
+
+
+
+$school_result = mysqli_query($connection, $query);
+
+if (!$school_result) {
+  # code...
+die("Query FAILED getting school result" . mysqli_error($connection)) ;
+}
+?>
+
+
+
+
+<?php
+$username = $_SESSION['username'];
+$query = "SELECT id, username, state, stateid, email, first_name, last_name, address,  phone FROM teachers WHERE creatorid = '$get_creatorid'";
+
+
+
+
+$teacher_result = mysqli_query($connection, $query);
+
+if (!$teacher_result) {
+  # code...
+die("Query FAILED profile info" . mysqli_error($connection)) ;
+}
+?>
+
+
+
+<?php
+$username = $_SESSION['username'];
+$query = "SELECT id, username, state, stateid, email, first_name, last_name, address,  phone, schoolid, schoolname FROM students WHERE creatorid = '$get_creatorid'";
+
+
+
+
+$student_result = mysqli_query($connection, $query);
+
+if (!$student_result) {
+  # code...
+die("Query FAILED profile info" . mysqli_error($connection)) ;
+}
+?>
+
+
+
+
+
+
+<?php
+
+$query = "SELECT type FROM list WHERE id = '$get_creatorid'";
+
+$type_get = mysqli_query($connection, $query);
+
+
+if (!$type_get) {
+  # code...
+die("Query FAILED get secret question" . mysqli_error($connection)) ;
+}
+
+
+$type = mysqli_fetch_array($type_get);
+
+$type=$type['type'];
+
+$_SESSION['type']= $type;
+
+
+if ($type="admin") {
+
+
+   include './Includes/Admin_User.php';
+
+
+}
+
+elseif ($type="teacher") {
+
+     include './Includes/Teacher_User.php';
+
+}
+
+elseif ($type="student") {
+
+  include './Includes/Student_User.php';
+
+}
+
+
+?>

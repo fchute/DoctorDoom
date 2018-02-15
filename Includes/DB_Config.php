@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $password = "";
-$database = "scratch";
+$database = "tester";
 
 
 

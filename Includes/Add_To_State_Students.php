@@ -13,7 +13,7 @@
                 if ($rows) {
                   # Checks for user in primary directory to get info
 
-                  $query = "SELECT id FROM list WHERE username = '$username'";
+                  $query = "SELECT id FROM students WHERE username = '$username'";
 
 
                                     $id_get = mysqli_query($connection, $query);
@@ -30,7 +30,8 @@
                                     $id=$id['id'];
 
 
-                                    $type="admin";
+
+                                    $type="student";
 
                 $query = "INSERT INTO ".$state." (username,first_name,last_name,address,state,phone, primaryID, type)";
                 $query .= "VALUE ('$username', '$first_name', '$last_name', '$address', '$state', '$phone', '$id', '$type')";

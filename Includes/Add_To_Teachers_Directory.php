@@ -1,22 +1,23 @@
+<?php include './Includes/authenticate.php'; ?>
+
 <?php
 
-
-      $query = "SHOW TABLES IN ".$database." WHERE Tables_in_".$database." = 'list'";
+      $query = "SHOW TABLES IN ".$database." WHERE Tables_in_".$database." = 'teachers'";
 
       $result = mysqli_query($connection, $query);
       if (!$result) {
         # code...
-      die("Query FAILED adding to primary show tables" . mysqli_error($connection)) ;
+      die("Query FAILED adding to teachers directory" . mysqli_error($connection)) ;
     }
       $rows = mysqli_num_rows($result);
 
 
-      $type="admin";
-
+      $type="teacher";
+      $creatorid=$_SESSION['id'];
                   if ($rows) {
 
-    $query = "INSERT INTO list(username,password,email, secret_question,secret_answer,first_name,last_name,address,state,phone,type) ";
-    $query .= "VALUE ('$username', '$password', '$email', '$secret_question', '$secret_answer','$first_name', '$last_name', '$address', '$state', '$phone', '$type')";
+    $query = "INSERT INTO teachers(username,password,email, secret_question,secret_answer,first_name,last_name,address,state,phone,type,creatorid) ";
+    $query .= "VALUE ('$username', '$password', '$email', '$secret_question', '$secret_answer','$first_name', '$last_name', '$address', '$state', '$phone','$type','$creatorid')";
 
 
     $result = mysqli_query($connection, $query);

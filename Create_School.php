@@ -1,38 +1,77 @@
+<?php include './Includes/authenticate.php';
+
+
+$username= $_SESSION["username"];
+?>
+
 <?php
 
-// session_start();
+
 
 include './Includes/DB_Config.php';
 
-    if(isset($_POST['submit']))
-    {
+ ?>
 
-    include './Includes/preparefields.php';
-
-    include './Includes/Add_To_Primary_Directory.php';
-    }
-
+<?php
 
     if(isset($_POST['submit']))
     {
+      include './Includes/prepare_school_fields.php';
 
-    include './Includes/preparefields.php';
 
-    include './Includes/Add_To_State_Directory.php';
 
-    include './Includes/Add_State_Id_To_Primary_Directory.php';
+      $query = "SELECT id FROM list WHERE username = '$username'";
 
-    header("Location: login.php");
 
-              }
-?>
+                        $id_get = mysqli_query($connection, $query);
+
+
+                        if (!$id_get) {
+                          # code...
+                        die("Query FAILED: User not found in primary directory" . mysqli_error($connection)) ;
+                        }
+
+
+                        $id = mysqli_fetch_array($id_get);
+
+                        $creatorid=$id['id'];
+
+      $query = "SELECT stateid FROM list WHERE username = '$username'";
+
+
+                        $stateid_get = mysqli_query($connection, $query);
+
+
+                        if (!$stateid_get) {
+                          # code...
+                        die("Query FAILED: User not found in primary directory" . mysqli_error($connection)) ;
+                        }
+
+
+                        $stateid = mysqli_fetch_array($stateid_get);
+
+                        $creatorstateid=$stateid['stateid'];
+
+
+
+
+
+
+
+    include './Includes/add_school_to_db.php';
+
+}
+ ?>
+
+
+
 
 
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Doc</title>
+    <title>Create School</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
   </head>
@@ -41,17 +80,29 @@ include './Includes/DB_Config.php';
   <div class="row">
 
 
-  <h2>Register an account</h2>
-    <p style="margin:10px;">or</p>
-    <form method="GET" action="login.php">
-        <input type="submit" value="Login" class="btn btn-primary"/>
-    </form>
-    <p style="margin:10px;">or</p>
-    <form method="GET" action="reset.php">
-        <input type="submit" value="Reset Your Password" class="btn btn-primary"/>
-    </form>
+  <h2>Create New School</h2>
 
+  <div class="" style="   float:left; display:inline;">
+
+  <a href="logout.php" class="btn btn-primary btn-md active" role="button" style="margin:10px;">Logout</a>
+  </div>
+
+<div class="" style="   float:left; display:inline;">
+
+    <a href="Complete_Directory.php" class="btn btn-primary btn-md active" role="button" style="margin:10px;">Complete User Directory</a>
+  </div>
+
+    <div class="" style="   float:left; display:inline;">
+
+      <a href="State_Directory.php" class="btn btn-primary btn-md active" role="button" style="margin:10px;">State User Directory</a>
     </div>
+
+    <div class="" style="   float:left; display:inline;">
+
+    <a href="User_Page.php?id=<?php echo $_SESSION['id'] ?>" class="btn btn-primary btn-md active" role="button" style="margin:10px;"><?php echo $_SESSION['username']; ?></a>
+    </div>
+
+
 </div>
 
     <div class="container">
@@ -59,42 +110,10 @@ include './Includes/DB_Config.php';
           <form action="" method="post">
 
 
-            <label for="username">Username</label>
+            <label for="username">School Name</label>
             <div class="form-group">
-              <input type="text" name="username" class="form-control">
+              <input type="text" name="schoolname" class="form-control">
             </div>
-
-            <label for="password">Password</label>
-            <div class="form-group">
-              <input type="password" name="password" value="" class="form-control">
-            </div>
-
-            <label for="email">E-Mail</label>
-            <div class="form-group">
-              <input type="text" name="email" value="" class="form-control">
-            </div>
-
-
-            <label for="secret_question">Provide a question in case you need to reset your password</label>
-            <div class="form-group">
-              <input type="text" name="secret_question" value="" class="form-control">
-            </div>
-
-            <label for="secret_answer">Provide the answer to your question</label>
-            <div class="form-group">
-              <input type="password" name="secret_answer" value="" class="form-control">
-            </div>
-
-
-<label for="name">First Name</label>
-<div class="form-group">
-  <input type="text" name="first_name" value="" class="form-control">
-</div>
-
-<label for="name">Last Name</label>
-<div class="form-group">
-  <input type="text" name="last_name" value="" class="form-control">
-</div>
 
 <label for="state">State</label>
 <div class="form-group">

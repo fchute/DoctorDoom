@@ -17,7 +17,7 @@ $query = "SELECT id FROM ".$state." WHERE username = '$username'";
      $id=$id['id'];
 
 
- $query = "UPDATE list SET stateid = '$id' WHERE username = '$username'";
+ $query = "UPDATE teachers SET stateid = '$id' WHERE username = '$username'";
 
 
      $result = mysqli_query($connection, $query);

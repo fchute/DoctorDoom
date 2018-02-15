@@ -1,28 +1,36 @@
+<?php include './Includes/authenticate.php';
+
+if($_SESSION["type"]!=="admin" && $_SESSION["type"]!=="teacher"){
+header("Location: login.php");
+exit(); }
+
+ ?>
+
+
 <?php
 
-// session_start();
 
 include './Includes/DB_Config.php';
 
     if(isset($_POST['submit']))
     {
 
-    include './Includes/preparefields.php';
+    include './Includes/preparestudentfields.php';
 
-    include './Includes/Add_To_Primary_Directory.php';
+    include './Includes/Add_To_Students_Directory.php';
     }
 
 
     if(isset($_POST['submit']))
     {
 
-    include './Includes/preparefields.php';
+    include './Includes/preparestudentfields.php';
 
-    include './Includes/Add_To_State_Directory.php';
+    include './Includes/Add_To_State_Students.php';
 
-    include './Includes/Add_State_Id_To_Primary_Directory.php';
+    include './Includes/Add_Student_Id_To_Primary_Directory.php';
 
-    header("Location: login.php");
+    header("Location: User_Page.php?id=".$_SESSION['id']);
 
               }
 ?>
@@ -41,15 +49,30 @@ include './Includes/DB_Config.php';
   <div class="row">
 
 
-  <h2>Register an account</h2>
-    <p style="margin:10px;">or</p>
-    <form method="GET" action="login.php">
-        <input type="submit" value="Login" class="btn btn-primary"/>
-    </form>
-    <p style="margin:10px;">or</p>
-    <form method="GET" action="reset.php">
-        <input type="submit" value="Reset Your Password" class="btn btn-primary"/>
-    </form>
+  <h2>Create a student</h2>
+
+
+  <div class="" style="   float:left; display:inline;">
+
+  <a href="logout.php" class="btn btn-primary btn-md active" role="button" style="margin:10px;">Logout</a>
+  </div>
+
+<div class="" style="   float:left; display:inline;">
+
+    <a href="Complete_Directory.php" class="btn btn-primary btn-md active" role="button" style="margin:10px;">Complete User Directory</a>
+  </div>
+
+    <div class="" style="   float:left; display:inline;">
+
+      <a href="State_Directory.php" class="btn btn-primary btn-md active" role="button" style="margin:10px;">State User Directory</a>
+    </div>
+
+    <div class="" style="   float:left; display:inline;">
+
+    <a href="User_Page.php?id=<?php echo $_SESSION['id']?>" class="btn btn-primary btn-md active" role="button" style="margin:10px;"><?php echo $_SESSION['username']; ?></a>
+    </div>
+
+
 
     </div>
 </div>
@@ -72,6 +95,11 @@ include './Includes/DB_Config.php';
             <label for="email">E-Mail</label>
             <div class="form-group">
               <input type="text" name="email" value="" class="form-control">
+            </div>
+
+            <label for="email">School Name</label>
+            <div class="form-group">
+              <input type="text" name="schoolname" value="" class="form-control">
             </div>
 
 

@@ -62,7 +62,7 @@ include './Includes/Fetch_State_Info.php';
 
           <div class="" style="   float:left; display:inline;">
 
-            <a href="User_Page.php" class="btn btn-primary btn-md active" role="button" style="margin:10px;"><?php echo $_SESSION['username']; ?></a>
+          <a href="User_Page.php?id=<?php echo $_SESSION['id'] ?>"class="btn btn-primary btn-md active" role="button" style="margin:10px;"><?php echo $_SESSION['username']; ?></a>
           </div>
 
 
@@ -87,7 +87,7 @@ $state_spaced= str_replace('_', ' ', $state);
 
 
      <table class="">
-     <tr><th>State Id</th><th>Username</th><th>First Name</th><th>Last Name</th><th>Address</th><th>State</th><th>Phone</th></tr>
+     <tr><th>State Id</th><th>Username</th><th>First Name</th><th>Last Name</th><th>Address</th><th>State</th><th>Phone</th> <th>type</th></tr>
 
 <?php
 // while ($row= mysqli_fetch_row($result)) {
@@ -109,6 +109,7 @@ while ($row= mysqli_fetch_assoc($result)) {
   echo "<td>" . $row['address'] . "</td>";
   echo "<td>" . $state_spaced . "</td>";
   echo "<td>" . $row['phone'] . "</td>";
+  echo "<td>" . $row['type'] . "</td>";
   echo "</tr>";
   // print_r($row);
 

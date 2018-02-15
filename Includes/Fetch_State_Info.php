@@ -12,7 +12,7 @@ $state_get = mysqli_query($connection, $query);
 
 if (!$state_get) {
   # code...
-die("Query FAILED" . mysqli_error($connection)) ;
+die("Query FAILED fetch state" . mysqli_error($connection)) ;
 }
 
 
@@ -23,7 +23,7 @@ $state=$state['state'];
 
 
 
-$query = "SELECT id, username, first_name, last_name, address, state, phone FROM $state";
+$query = "SELECT id, username, first_name, last_name, address, state, phone, type FROM $state";
 
 
 
@@ -64,7 +64,7 @@ $result = mysqli_query($connection, $query);
 
 if (!$result) {
   # code...
-die("Query FAILED" . mysqli_error($connection)) ;
+die("Query FAILED fetch state" . mysqli_error($connection)) ;
 }
 
 
