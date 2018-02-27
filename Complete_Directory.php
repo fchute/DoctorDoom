@@ -9,6 +9,11 @@ include './Includes/DB_Config.php';
 include './Includes/Fetch_Full_Info.php';
 
 
+if($_SESSION["type"]!=="admin"){
+header("Location: login.php");
+exit(); }
+
+
 ?>
 <!DOCTYPE html>
 <html>

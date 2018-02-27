@@ -1,5 +1,10 @@
 <?php include './Includes/DB_Config.php'; ?>
-<?php include './Includes/authenticate.php'; ?>
+<?php include './Includes/authenticate.php';
+
+
+if($_SESSION["type"]!=="admin" && $_SESSION["type"]!=="teacher"){
+header("Location: login.php");
+exit(); } ?>
 
 
 
@@ -41,7 +46,7 @@
 
   else{
 
-    echo "search_school not found";
+  echo '<a href="/scratch_local/Create_School.php">Create_School</a>';
   }
 
 }

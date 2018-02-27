@@ -1,6 +1,12 @@
 <?php include './Includes/authenticate.php';
 
 $username= $_SESSION["username"];
+
+
+
+if($_SESSION["type"]!=="admin" && $_SESSION["type"]!=="teacher"){
+header("Location: login.php");
+exit(); }
 ?>
 
 <?php include './Includes/DB_Config.php'; ?>

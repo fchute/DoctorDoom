@@ -52,11 +52,6 @@
       <a href="reenter_password.php" class="btn btn-primary btn-md active" role="button" style="margin:10px;">Update Secret Question</a>
     </div>
 
-    <div class="" style="   float:left; display:inline;">
-
-      <a href="Create_School.php" class="btn btn-primary btn-md active" role="button" style="margin:10px;">Create School</a>
-    </div>
-
 
     <div class="" style="   float:left; display:inline;">
 
