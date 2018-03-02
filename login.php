@@ -42,7 +42,7 @@ if(isset($_POST['submit']))
               </form>
               <br>
 
-              <form method="GET" action="Register.php">
+              <form method="GET" action="register.php">
                   <input type="submit" value="Register" class="btn btn-primary"/>
               </form>
               <br>

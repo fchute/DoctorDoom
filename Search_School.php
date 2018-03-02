@@ -46,7 +46,7 @@ exit(); } ?>
 
   else{
 
-  echo '<a href="/scratch_local/Create_School.php">Create_School</a>';
+  echo '<a href="Create_School.php">Create_School</a>';
   }
 
 }
